@@ -1,0 +1,293 @@
+<!-- CandlestickChart generated in R 3.4.3 by googleVis 0.6.2 package -->
+<!-- Mon Jul 16 11:06:41 2018 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataCandlestickChartID9745ca69bd4 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+new Date(2017,0,2),
+996.7,
+998.62,
+1021.75,
+1031.39
+],
+[
+new Date(2017,0,3),
+1021.6,
+1021.6,
+1043.84,
+1044.08
+],
+[
+new Date(2017,0,4),
+1044.4,
+1044.4,
+1154.73,
+1159.42
+],
+[
+new Date(2017,0,5),
+910.42,
+1156.73,
+1013.38,
+1191.1
+],
+[
+new Date(2017,0,6),
+883.94,
+1014.24,
+902.2,
+1046.81
+],
+[
+new Date(2017,0,7),
+823.56,
+903.49,
+908.59,
+908.59
+],
+[
+new Date(2017,0,8),
+887.25,
+908.17,
+911.2,
+942.72
+],
+[
+new Date(2017,0,9),
+879.81,
+913.24,
+902.83,
+913.69
+],
+[
+new Date(2017,0,10),
+901.06,
+902.44,
+907.68,
+914.87
+],
+[
+new Date(2017,0,11),
+762.76,
+908.12,
+777.76,
+919.45
+],
+[
+new Date(2017,0,12),
+755.76,
+775.18,
+804.83,
+826.25
+],
+[
+new Date(2017,0,13),
+780,
+803.74,
+823.98,
+829
+],
+[
+new Date(2017,0,14),
+812.46,
+825.14,
+818.41,
+835.09
+],
+[
+new Date(2017,0,15),
+812.87,
+818.14,
+821.8,
+823.31
+],
+[
+new Date(2017,0,16),
+820.27,
+821.78,
+831.53,
+834.53
+],
+[
+new Date(2017,0,17),
+830.8,
+830.95,
+907.94,
+910.56
+],
+[
+new Date(2017,0,18),
+858.3,
+909.37,
+886.62,
+917.5
+],
+[
+new Date(2017,0,19),
+884.34,
+888.34,
+899.07,
+904.61
+],
+[
+new Date(2017,0,20),
+887.01,
+898.17,
+895.03,
+899.4
+],
+[
+new Date(2017,0,21),
+895.53,
+895.55,
+921.79,
+927.37
+],
+[
+new Date(2017,0,22),
+897.56,
+922.21,
+924.67,
+937.52
+],
+[
+new Date(2017,0,23),
+916.74,
+925.5,
+921.01,
+928.27
+],
+[
+new Date(2017,0,24),
+892.29,
+910.68,
+892.69,
+924.14
+],
+[
+new Date(2017,0,25),
+891.69,
+891.92,
+901.54,
+903.25
+],
+[
+new Date(2017,0,26),
+902.22,
+902.39,
+917.59,
+919.33
+],
+[
+new Date(2017,0,27),
+915.85,
+918.36,
+919.75,
+923.22
+],
+[
+new Date(2017,0,28),
+919.81,
+919.81,
+921.59,
+923.91
+],
+[
+new Date(2017,0,29),
+919.15,
+922.07,
+919.5,
+923.42
+],
+[
+new Date(2017,0,30),
+919.47,
+920.15,
+920.38,
+923.05
+] 
+];
+data.addColumn('date','date');
+data.addColumn('number','low');
+data.addColumn('number','open');
+data.addColumn('number','close');
+data.addColumn('number','high');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartCandlestickChartID9745ca69bd4() {
+var data = gvisDataCandlestickChartID9745ca69bd4();
+var options = {};
+options["allowHtml"] = true;
+options["title"] = "OHLC chart of Bitcoin in Jan 2017";
+options["legend"] = "top";
+options["height"] = 600;
+
+
+    var chart = new google.visualization.CandlestickChart(
+    document.getElementById('CandlestickChartID9745ca69bd4')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartCandlestickChartID9745ca69bd4);
+})();
+function displayChartCandlestickChartID9745ca69bd4() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartCandlestickChartID9745ca69bd4"></script>
+ 
+<!-- divChart -->
+  
+<div id="CandlestickChartID9745ca69bd4" 
+  style="width: 500; height: 600;">
+</div>

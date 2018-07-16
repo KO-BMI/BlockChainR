@@ -1,0 +1,162 @@
+---
+title: "Crypto Analysis1.0"
+author: "Ki Oh"
+date: "7/16/2018"
+output: pdf_document
+---
+##Introduction
+
+Cryptocurrency is a revolution in Finance. In 2017, its market value has reached more than $200 billion with an increase of about 1200% and created a buzz in the market.
+
+As of 7 January 2018 there are 1384 cryptocurrencies and the count is still growing. Out of all these Bitcoin is the most famous cryptocurrency followed by Ethereum, Ripple, Bitcoin Cash.
+
+Cryptocurrency experencies high volatility in prices and analytics is useful in understanding this variations quantitatively and making strategic decisions.
+
+R being a power statistical analysis tool is one of the best choice to analyze the cryptocurrency data.
+
+##Import the data
+
+There are many websites which provides API to import the cryptocurrency data.
+
+coinmarketcap and quandl provides an API to get the both live and historical data. These APIs are used to get the data in USD. To import the data in INR use the koinex or coindelta api.
+
+coinmarketcapr library in R is used to get prices of cryptocurrencies from ‘Coin Market Cap’
+```{r setup, include=FALSE}
+
+library(coinmarketcapr)
+library(formatR)
+library(yaml)
+#googleVis library is used for visualization purpose as it can produce interactive charts.
+library(googleVis)
+library(knitr)
+op <- options(gvis.plot.tag="chart")
+```
+
+get_marketcap_ticker_all function in coinmarketcapr library is used to get the live data of top 100 cryptocurrencies.
+```{r}
+top_cc <- get_marketcap_ticker_all()
+kable(head(top_cc))
+```
+Before analyzing the data , look at the class of each column
+```{r}
+mapply(class,top_cc)
+```
+
+From the output it can be observed that class of all the columns is “character” but except the columns id,name,symbol all other columns contains numerical data. So, convert these columns to double data type before performing analysis.
+```{r}
+for(i in c(4:ncol(top_cc))) {
+    top_cc[,i] <- as.double(top_cc[,i])
+}
+```
+##Market Cap of 15 leading cryptocurrencies
+
+Market Capitalization of a cryptocurrency is product of price of the currency and circulation available. Cryptocurrencies are ranked based on Market Capitalization.
+```{r}
+mark <- gvisColumnChart(top_cc[1:15, ], "name", "market_cap_usd", options = list(title = "Market Cap Of Leading Cryptocurrencies", 
+    legend = "left"))
+
+#plot('mark')
+cat(mark$html$chart, file = "MarketCapOfTop.html") # this store a html with g1 graph.
+```
+
+
+#Variations in Price
+Now let us look at the variation of prices.
+Negative value of percentage variation shows a drop in the prices and positive means increase in the prices.
+```{r}
+var <- gvisColumnChart(top_cc[1:15, ], "name", c("percent_change_1h", "percent_change_24h", 
+    "percent_change_7d"), options = list(title = "% change of prices", legend = "top"))
+#plot(var)
+cat(var$html$chart, file = "PriceVariation.html") # this store a html with g1 graph.
+```
+
+#Variations in Volume
+```{r}
+var2 <- gvisColumnChart(top_cc[1:15, ], "name", c("percent_change_1h", "percent_change_24h", 
+    "percent_change_7d"), options = list(title = "% change of prices", legend = "top"))
+#plot(var)
+ cat(var2$html$chart, file = "VolumVariation.html") # this store a html with g1 graph.
+```
+Volume is the number of transactions of a cryptocurrency. It can be noticed from the plot that number of trancations of top 3 currencies are very high compared to other currencies.
+
+We have seen that market cap of each top 5 currencies is too high compared to other currencies, now let us find the market share of these top 5 currencies:
+
+
+```{r}
+format(sprintf("Market share of top 5 cryptocurrencies is %f",sum(top_cc[1:5,"market_cap_usd"])/sum(top_cc$market_cap_usd)))
+```
+About 75% of the cryptocurrency market share is covered by these 5 currencies.
+
+##Secondary Analysis
+So let us take past data of these 5 currencies and analyze.
+
+First import the historical data using crypto library. Crypto library in R retrieves the historical market data provided by ‘Cryptocurrency Market Capitalizations’
+```{r}
+library(httr)
+library(RCurl)
+library(crypto)
+library(knitr)
+```
+##Market Cap Trend
+
+Import the historical data of top 5 currencies and plot the trend of their market ca.
+
+listCoins function returns the list of all the coins and url to download their history data.
+getcoins function is used to get historical data of the coins.
+```{r}
+coins <- crypto::listCoins()
+kable(head(coins))
+data1 <- crypto::getCoins(coin = c("Bitcoin", "Ethereum", "Ripple", "Bitcoin Cash", 
+    "Cardano"))
+```
+
+
+```{r}
+
+markettrend <- gvisAnnotationChart(data1, idvar = "name", "date", "market", options = list(title = "Market Cap Trend", 
+    legend = "top"))
+#plot(p)
+
+cat(markettrend$html$chart, file = "marketcaptrend.html") # this store a html with g1 graph.
+```
+The plot shows that over years bitcoin has highest market share.
+
+##Price Movement
+
+OHLC chart(open high low close chart) is used to look at price movements.
+
+In the following plot blue color filled candlestick bar means on that particular day closing price is more than opening price and white color filled candlestick means the that closing price is lower than opening price.
+```{r}
+ohlc = gvisCandlestickChart(data1[data1$name == "Bitcoin" & data1$date < "2017-01-31" & 
+    data1$date > "2017-01-01", ], "date", "low", "open", "close", "high", options = list(title = "OHLC chart of Bitcoin in Jan 2017", 
+    legend = "top", height = 600))
+#plot(ohlc)
+cat(ohlc$html$chart, file = "OHLC.html") # this store a html with g1 graph.
+```
+
+
+##Market Cap Growth
+
+Bitcoin is the first cryptocurrency and there are many coins which have originated later But their market cap is growing rapidly.
+
+Now let us look at the % increase in market cap over past 3 months data and see which coin is evolving rapidly.
+
+quantmod library in R provides Delt function which is used to calculate the % difference over a period. Using this function, we will calculate the market growth of each currency across over 3 months time period.
+```{r}
+library(quantmod)
+#====================================
+coins <- unique(data1$name)
+s_date = Sys.Date() - 1
+data1$market_growth <- NA
+for (i in coins) {
+    data1[data1$name == i, ]$market_growth = Delt(data1[data1$name == i, ]$market, 
+        type = "arithmetic", k = 90)
+}
+c_data = data1[complete.cases(data1), ]  #complete.cases is used to get rwcords without NA
+mg_3 = gvisColumnChart(c_data[c_data$date == s_date, ], "name", "market_growth", 
+    options = list(title = "Market Growth in the last 3 months", scaleType = "allfixed", 
+        legend = "top"))
+#plot(mg_3)
+cat(mg_3$html$chart, file = "growth.html") # this store a html with g1 graph.
+
+```
