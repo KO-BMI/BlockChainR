@@ -1,93 +1,46 @@
 <!-- ColumnChart generated in R 3.4.3 by googleVis 0.6.2 package -->
-<!-- Mon Jul 16 10:40:12 2018 -->
+<!-- Mon Jul 16 11:17:00 2018 -->
 
 
 <!-- jsHeader -->
 <script type="text/javascript">
  
 // jsData 
-function gvisDataColumnChartID5df62f37d79 () {
+function gvisDataColumnChartID5df7852fb44 () {
 var data = new google.visualization.DataTable();
 var datajson =
 [
  [
 "Bitcoin",
-113586553200
+-0.2401480529
 ],
 [
 "Ethereum",
-47652214180
-],
-[
-"XRP",
-18193235320
+-0.16545039
 ],
 [
 "Bitcoin Cash",
-13310694150
-],
-[
-"EOS",
-6990665035
-],
-[
-"Litecoin",
-4753096799
-],
-[
-"Stellar",
-4304675134
-],
-[
-"Cardano",
-3916698838
-],
-[
-"IOTA",
-2965036134
-],
-[
-"Tether",
-2704606462
-],
-[
-"TRON",
-2385611058
-],
-[
-"NEO",
-2327650000
-],
-[
-"Monero",
-2087370611
-],
-[
-"Dash",
-1973245967
-],
-[
-"Ethereum Classic",
-1769522545
+-0.09146048883
 ] 
 ];
 data.addColumn('string','name');
-data.addColumn('number','market_cap_usd');
+data.addColumn('number','market_growth');
 data.addRows(datajson);
 return(data);
 }
  
 // jsDrawChart
-function drawChartColumnChartID5df62f37d79() {
-var data = gvisDataColumnChartID5df62f37d79();
+function drawChartColumnChartID5df7852fb44() {
+var data = gvisDataColumnChartID5df7852fb44();
 var options = {};
 options["allowHtml"] = true;
-options["title"] = "Market Cap Of Leading Cryptocurrencies";
-options["legend"] = "left";
+options["title"] = "Market Growth in the last 3 months";
+options["scaleType"] = "allfixed";
+options["legend"] = "top";
 
 
     var chart = new google.visualization.ColumnChart(
-    document.getElementById('ColumnChartID5df62f37d79')
+    document.getElementById('ColumnChartID5df7852fb44')
     );
     chart.draw(data,options);
     
@@ -111,9 +64,9 @@ if (newPackage)
   pkgs.push(chartid);
   
 // Add the drawChart function to the global list of callbacks
-callbacks.push(drawChartColumnChartID5df62f37d79);
+callbacks.push(drawChartColumnChartID5df7852fb44);
 })();
-function displayChartColumnChartID5df62f37d79() {
+function displayChartColumnChartID5df7852fb44() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   window.clearTimeout(window.__gvisLoad);
@@ -137,10 +90,10 @@ callbacks.shift()();
 </script>
  
 <!-- jsChart -->  
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartColumnChartID5df62f37d79"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartColumnChartID5df7852fb44"></script>
  
 <!-- divChart -->
   
-<div id="ColumnChartID5df62f37d79" 
+<div id="ColumnChartID5df7852fb44" 
   style="width: 500; height: automatic;">
 </div>

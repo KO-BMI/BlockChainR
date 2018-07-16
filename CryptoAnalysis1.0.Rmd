@@ -56,7 +56,7 @@ mark <- gvisColumnChart(top_cc[1:15, ], "name", "market_cap_usd", options = list
     legend = "left"))
 
 #plot('mark')
-cat(mark$html$chart, file = "MarketCapOfTop.html") # this store a html with g1 graph.
+cat(mark$html$chart, file = "~/Documents/GitHub2.0/BlockChainR/OutputGraphs/MarketCapOfTop.html") # this store a html with g1 graph.
 ```
 
 
@@ -67,7 +67,7 @@ Negative value of percentage variation shows a drop in the prices and positive m
 var <- gvisColumnChart(top_cc[1:15, ], "name", c("percent_change_1h", "percent_change_24h", 
     "percent_change_7d"), options = list(title = "% change of prices", legend = "top"))
 #plot(var)
-cat(var$html$chart, file = "PriceVariation.html") # this store a html with g1 graph.
+cat(var$html$chart, file = "~/Documents/GitHub2.0/BlockChainR/OutputGraphs/PriceVariation.html") # this store a html with g1 graph.
 ```
 
 #Variations in Volume
@@ -75,7 +75,7 @@ cat(var$html$chart, file = "PriceVariation.html") # this store a html with g1 gr
 var2 <- gvisColumnChart(top_cc[1:15, ], "name", c("percent_change_1h", "percent_change_24h", 
     "percent_change_7d"), options = list(title = "% change of prices", legend = "top"))
 #plot(var)
- cat(var2$html$chart, file = "VolumVariation.html") # this store a html with g1 graph.
+ cat(var2$html$chart, file = "~/Documents/GitHub2.0/BlockChainR/OutputGraphs/VolumVariation.html") # this store a html with g1 graph.
 ```
 Volume is the number of transactions of a cryptocurrency. It can be noticed from the plot that number of trancations of top 3 currencies are very high compared to other currencies.
 
@@ -117,7 +117,7 @@ markettrend <- gvisAnnotationChart(data1, idvar = "name", "date", "market", opti
     legend = "top"))
 #plot(p)
 
-cat(markettrend$html$chart, file = "marketcaptrend.html") # this store a html with g1 graph.
+cat(markettrend$html$chart, file = "~/Documents/GitHub2.0/BlockChainR/OutputGraphs/marketcaptrend.html") # this store a html with g1 graph.
 ```
 The plot shows that over years bitcoin has highest market share.
 
@@ -131,7 +131,7 @@ ohlc = gvisCandlestickChart(data1[data1$name == "Bitcoin" & data1$date < "2017-0
     data1$date > "2017-01-01", ], "date", "low", "open", "close", "high", options = list(title = "OHLC chart of Bitcoin in Jan 2017", 
     legend = "top", height = 600))
 #plot(ohlc)
-cat(ohlc$html$chart, file = "OHLC.html") # this store a html with g1 graph.
+cat(ohlc$html$chart, file = "~/Documents/GitHub2.0/BlockChainR/OutputGraphs/OHLC.html") # this store a html with g1 graph.
 ```
 
 
@@ -157,6 +157,6 @@ mg_3 = gvisColumnChart(c_data[c_data$date == s_date, ], "name", "market_growth",
     options = list(title = "Market Growth in the last 3 months", scaleType = "allfixed", 
         legend = "top"))
 #plot(mg_3)
-cat(mg_3$html$chart, file = "growth.html") # this store a html with g1 graph.
+cat(mg_3$html$chart, file = "~/Documents/GitHub2.0/BlockChainR/OutputGraphs/growth.html") # this store a html with g1 graph.
 
 ```
