@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1531716960133.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "14B9EA45",
+    "lastKnownWriteTime" : 38654967809,
+    "last_content_update" : 1531716960133,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "id" : "85c89a3c408042c19394683b786c15d3",
+        "name" : "ui",
+        "title" : "ui"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "object_explorer"
+}
